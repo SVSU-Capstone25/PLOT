@@ -1,0 +1,9 @@
+[submodule "PLOT-FE"]
+	path = PLOT-FE
+	url = git@github.com:SVSU-Capstone25/PLOT-FE.git
+[submodule "PLOT-BE"]
+	path = PLOT-BE
+	url = git@github.com:SVSU-Capstone25/PLOT-BE.git
+[submodule "PLOT-DB"]
+	path = PLOT-DB
+	url = git@github.com:SVSU-Capstone25/PLOT-DB.git
