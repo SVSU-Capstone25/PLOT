@@ -6,6 +6,7 @@ services:
       context: ./PLOT-DB
     ports:
       - "1433:1433"
+    entrypoint: ./entrypoint.sh
     env_file:
       - .env
 
