@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  database:
+    build:
+      context: ./PLOT-DB
+    ports:
+      - "1433:1433"
+    env_file:
+      - .env
+
+  backend:
+    build:
+      context: ./PLOT-BE
+    ports:
+      - "8085:8085"
+    env_file:
+      - .env
+    depends_on:
+      - database
+
+  frontend:
+    build:
+      context: ./PLOT-FE
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - backend
