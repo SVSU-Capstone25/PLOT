@@ -18,6 +18,10 @@ services:
       - .env
     depends_on:
       - database
+    develop:
+      watch:
+        - action: rebuild
+          path: ./PLOT-BE
 
   frontend:
     build:
@@ -28,3 +32,7 @@ services:
       - .env
     depends_on:
       - backend
+    develop:
+      watch:
+        - action: rebuild
+          path: ./PLOT-FE
