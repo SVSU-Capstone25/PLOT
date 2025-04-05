@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   database:
     build:
@@ -12,27 +10,35 @@ services:
   backend:
     build:
       context: ./PLOT-BE
+      dockerfile: Dockerfile.dev
     ports:
       - "8085:8085"
     env_file:
       - .env
     depends_on:
       - database
+    volumes:
+      - ./PLOT-BE/Plot:/app
     develop:
       watch:
-        - action: rebuild
-          path: ./PLOT-BE
+        - action: sync
+          path: ./PLOT-BE/Plot
+          target: /app/Plot
 
   frontend:
     build:
       context: ./PLOT-FE
+      dockerfile: Dockerfile.dev
     ports:
       - "8080:8080"
     env_file:
       - .env
     depends_on:
       - backend
+    volumes:
+      - ./PLOT-FE/Plot:/app
     develop:
       watch:
-        - action: rebuild
-          path: ./PLOT-FE
+        - action: sync
+          path: ./PLOT-FE/Plot
+          target: /app/Plot
