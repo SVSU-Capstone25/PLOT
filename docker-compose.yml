@@ -6,6 +6,10 @@ services:
       - "1433:1433"
     env_file:
       - .env
+    develop:
+      watch:
+        - action: rebuild
+          path: ./PLOT-DB
 
   backend:
     build:
