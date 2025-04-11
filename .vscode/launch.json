@@ -15,7 +15,7 @@
       "name": "Full",
       "type": "node-terminal",
       "request": "launch",
-      "command": "docker compose up --build --watch",
+      "command": "docker compose up --watch",
       "postDebugTask": "Docker Stop"
     }
   ]
