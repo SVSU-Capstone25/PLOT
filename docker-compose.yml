@@ -10,6 +10,11 @@ services:
       watch:
         - action: rebuild
           path: ./PLOT-DB
+    healthcheck:
+      test: ["CMD", "test", "-f", "/tmp/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
 
   backend:
     build:
@@ -20,14 +25,15 @@ services:
     env_file:
       - .env
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     volumes:
-      - ./PLOT-BE/Plot:/app
+      - ./PLOT-BE/Plot:/src
     develop:
       watch:
         - action: sync
           path: ./PLOT-BE/Plot
-          target: /app/Plot
+          target: /src/Plot
 
   frontend:
     build:
@@ -38,11 +44,14 @@ services:
     env_file:
       - .env
     depends_on:
-      - backend
+      database:
+        condition: service_healthy
+      backend:
+        condition: service_started
     volumes:
-      - ./PLOT-FE/Plot:/app
+      - ./PLOT-FE/Plot:/src
     develop:
       watch:
         - action: sync
           path: ./PLOT-FE/Plot
-          target: /app/Plot
+          target: /src/Plot
