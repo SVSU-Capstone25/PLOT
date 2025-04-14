@@ -28,12 +28,12 @@ services:
       database:
         condition: service_healthy
     volumes:
-      - ./PLOT-BE/Plot:/src
+      - ./PLOT-BE/Plot:/app
     develop:
       watch:
         - action: sync
           path: ./PLOT-BE/Plot
-          target: /src/Plot
+          target: /app/Plot
 
   frontend:
     build:
@@ -49,9 +49,9 @@ services:
       backend:
         condition: service_started
     volumes:
-      - ./PLOT-FE/Plot:/src
+      - ./PLOT-FE/Plot:/app
     develop:
       watch:
         - action: sync
           path: ./PLOT-FE/Plot
-          target: /src/Plot
+          target: /app/Plot
